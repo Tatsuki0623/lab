@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_7457c9ce798ff9dfca027e0e24eb17e8 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_7457c9ce798ff9dfca027e0e24eb17e8" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_7457c9ce798ff9dfca027e0e24eb17e8 = L.map(
+                "map_7457c9ce798ff9dfca027e0e24eb17e8",
+                {
+                    center: [35.690921, 139.700258],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 4.5,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_a6629c9b62f88ceebf71b833ffd904e2 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors", "detectRetina": false, "maxNativeZoom": 19, "maxZoom": 19, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            );
+        
+    
+            tile_layer_a6629c9b62f88ceebf71b833ffd904e2.addTo(map_7457c9ce798ff9dfca027e0e24eb17e8);
+        
+    
+            var marker_9daee246661f350573e02c14ef2e62e2 = L.marker(
+                [36.405, 139.09583333333333],
+                {}
+            ).addTo(map_7457c9ce798ff9dfca027e0e24eb17e8);
+        
+    
+        var popup_4bdeff8a46a77e92811071a679f7dc9b = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_61e485dbdd2f3566fcd5cd5e44606d6d = $(`<div id="html_61e485dbdd2f3566fcd5cd5e44606d6d" style="width: 100.0%; height: 100.0%;">衛生環境研究所_10201090</div>`)[0];
+                popup_4bdeff8a46a77e92811071a679f7dc9b.setContent(html_61e485dbdd2f3566fcd5cd5e44606d6d);
+            
+        
+
+        marker_9daee246661f350573e02c14ef2e62e2.bindPopup(popup_4bdeff8a46a77e92811071a679f7dc9b)
+        ;
+
+        
+    
+    
+            var marker_3485382d1ce45a8d3b6473a12be8bf72 = L.marker(
+                [36.33805555555556, 138.9958333333333],
+                {}
+            ).addTo(map_7457c9ce798ff9dfca027e0e24eb17e8);
+        
+    
+        var popup_4659b5ada815a99de63cb271909dcd74 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_a4f64845ea11392ba99c299438d9ce60 = $(`<div id="html_a4f64845ea11392ba99c299438d9ce60" style="width: 100.0%; height: 100.0%;">高崎勤労ホーム駐車場_10202010</div>`)[0];
+                popup_4659b5ada815a99de63cb271909dcd74.setContent(html_a4f64845ea11392ba99c299438d9ce60);
+            
+        
+
+        marker_3485382d1ce45a8d3b6473a12be8bf72.bindPopup(popup_4659b5ada815a99de63cb271909dcd74)
+        ;
+
+        
+    
+    
+            var marker_658a8c642084bd4a68ff28fc79a22eb9 = L.marker(
+                [36.409444444444446, 139.34305555555557],
+                {}
+            ).addTo(map_7457c9ce798ff9dfca027e0e24eb17e8);
+        
+    
+        var popup_6eda20763f3c499205a9551ddc354f4b = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_9a3fe5307e732723afae09c7ac89b0f8 = $(`<div id="html_9a3fe5307e732723afae09c7ac89b0f8" style="width: 100.0%; height: 100.0%;">桐生市立東小学校_10203010</div>`)[0];
+                popup_6eda20763f3c499205a9551ddc354f4b.setContent(html_9a3fe5307e732723afae09c7ac89b0f8);
+            
+        
+
+        marker_658a8c642084bd4a68ff28fc79a22eb9.bindPopup(popup_6eda20763f3c499205a9551ddc354f4b)
+        ;
+
+        
+    
+    
+            var marker_a3095e8a59a638634916614d565eca8a = L.marker(
+                [36.37166666666667, 139.3536111111111],
+                {}
+            ).addTo(map_7457c9ce798ff9dfca027e0e24eb17e8);
+        
+    
+        var popup_998841e1d52c33644a56271fa96e7e8b = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_e697f08195b0da29bf95a03eb09f7ef7 = $(`<div id="html_e697f08195b0da29bf95a03eb09f7ef7" style="width: 100.0%; height: 100.0%;">桐生自排局_10203510</div>`)[0];
+                popup_998841e1d52c33644a56271fa96e7e8b.setContent(html_e697f08195b0da29bf95a03eb09f7ef7);
+            
+        
+
+        marker_a3095e8a59a638634916614d565eca8a.bindPopup(popup_998841e1d52c33644a56271fa96e7e8b)
+        ;
+
+        
+    
+    
+            var marker_eb78415b9cb4cf692ed30c692f6ca159 = L.marker(
+                [36.314166666666665, 139.1938888888889],
+                {}
+            ).addTo(map_7457c9ce798ff9dfca027e0e24eb17e8);
+        
+    
+        var popup_1dbdc039f625d985f6d56772aa43d446 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_cd5c01c2a72e9bc1e7bfe415d4c89e38 = $(`<div id="html_cd5c01c2a72e9bc1e7bfe415d4c89e38" style="width: 100.0%; height: 100.0%;">伊勢崎市立南小学校_10204030</div>`)[0];
+                popup_1dbdc039f625d985f6d56772aa43d446.setContent(html_cd5c01c2a72e9bc1e7bfe415d4c89e38);
+            
+        
+
+        marker_eb78415b9cb4cf692ed30c692f6ca159.bindPopup(popup_1dbdc039f625d985f6d56772aa43d446)
+        ;
+
+        
+    
+    
+            var marker_76e6a3e03fcb0c5833161dcfe1cd1b87 = L.marker(
+                [36.3025, 139.20777777777778],
+                {}
+            ).addTo(map_7457c9ce798ff9dfca027e0e24eb17e8);
+        
+    
+        var popup_784a8ea3c356a557374a41a0b4cad3c5 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_fd7e059e414b9cd33c0944a09b472c15 = $(`<div id="html_fd7e059e414b9cd33c0944a09b472c15" style="width: 100.0%; height: 100.0%;">伊勢崎自排局_10204510</div>`)[0];
+                popup_784a8ea3c356a557374a41a0b4cad3c5.setContent(html_fd7e059e414b9cd33c0944a09b472c15);
+            
+        
+
+        marker_76e6a3e03fcb0c5833161dcfe1cd1b87.bindPopup(popup_784a8ea3c356a557374a41a0b4cad3c5)
+        ;
+
+        
+    
+    
+            var marker_75d40d3b2e0b5713558ce37504ffeb2b = L.marker(
+                [36.28972222222222, 139.3813888888889],
+                {}
+            ).addTo(map_7457c9ce798ff9dfca027e0e24eb17e8);
+        
+    
+        var popup_e41d7cbc2cb4b9fbbd588192b5c593e5 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_a7cc40a0684ebc035de199133142aa8e = $(`<div id="html_a7cc40a0684ebc035de199133142aa8e" style="width: 100.0%; height: 100.0%;">太田市立中央小学校_10205010</div>`)[0];
+                popup_e41d7cbc2cb4b9fbbd588192b5c593e5.setContent(html_a7cc40a0684ebc035de199133142aa8e);
+            
+        
+
+        marker_75d40d3b2e0b5713558ce37504ffeb2b.bindPopup(popup_e41d7cbc2cb4b9fbbd588192b5c593e5)
+        ;
+
+        
+    
+    
+            var marker_0c57ba503b7641779d3b1e69380df1af = L.marker(
+                [36.645833333333336, 139.0427777777778],
+                {}
+            ).addTo(map_7457c9ce798ff9dfca027e0e24eb17e8);
+        
+    
+        var popup_fbf7dc822c49dc9f0b508e9759dcd2e1 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_0aa92c6cda0809e7ad0a7d0e1338e88e = $(`<div id="html_0aa92c6cda0809e7ad0a7d0e1338e88e" style="width: 100.0%; height: 100.0%;">沼田市立沼田小学校_10206010</div>`)[0];
+                popup_fbf7dc822c49dc9f0b508e9759dcd2e1.setContent(html_0aa92c6cda0809e7ad0a7d0e1338e88e);
+            
+        
+
+        marker_0c57ba503b7641779d3b1e69380df1af.bindPopup(popup_fbf7dc822c49dc9f0b508e9759dcd2e1)
+        ;
+
+        
+    
+    
+            var marker_54133fbfd9f8cfa3c75c62ec189c4429 = L.marker(
+                [36.24972222222223, 139.53250000000003],
+                {}
+            ).addTo(map_7457c9ce798ff9dfca027e0e24eb17e8);
+        
+    
+        var popup_1f7b034711f55ad24d242c6609f09e20 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_67c809dd4fd1d9ac70bace9c464f9717 = $(`<div id="html_67c809dd4fd1d9ac70bace9c464f9717" style="width: 100.0%; height: 100.0%;">館林市民センター_10207010</div>`)[0];
+                popup_1f7b034711f55ad24d242c6609f09e20.setContent(html_67c809dd4fd1d9ac70bace9c464f9717);
+            
+        
+
+        marker_54133fbfd9f8cfa3c75c62ec189c4429.bindPopup(popup_1f7b034711f55ad24d242c6609f09e20)
+        ;
+
+        
+    
+    
+            var marker_29f65ba878b695d5421b44e3423512af = L.marker(
+                [36.23527777777778, 139.52055555555555],
+                {}
+            ).addTo(map_7457c9ce798ff9dfca027e0e24eb17e8);
+        
+    
+        var popup_6f60d5036f2cb46c0f54dc378be83f79 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_3fad1cd4e31a7ea9eeaf30ca2648cd87 = $(`<div id="html_3fad1cd4e31a7ea9eeaf30ca2648cd87" style="width: 100.0%; height: 100.0%;">館林自排局_10207510</div>`)[0];
+                popup_6f60d5036f2cb46c0f54dc378be83f79.setContent(html_3fad1cd4e31a7ea9eeaf30ca2648cd87);
+            
+        
+
+        marker_29f65ba878b695d5421b44e3423512af.bindPopup(popup_6f60d5036f2cb46c0f54dc378be83f79)
+        ;
+
+        
+    
+    
+            var marker_742bbf5226f3e80699723a9c1028990b = L.marker(
+                [36.49888888888889, 138.99416666666664],
+                {}
+            ).addTo(map_7457c9ce798ff9dfca027e0e24eb17e8);
+        
+    
+        var popup_ed26d0506fc51a4faf03ab337dcaac27 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_e3d88e0df44d39b42fb114e0788d87eb = $(`<div id="html_e3d88e0df44d39b42fb114e0788d87eb" style="width: 100.0%; height: 100.0%;">渋川第１測定局_10208010</div>`)[0];
+                popup_ed26d0506fc51a4faf03ab337dcaac27.setContent(html_e3d88e0df44d39b42fb114e0788d87eb);
+            
+        
+
+        marker_742bbf5226f3e80699723a9c1028990b.bindPopup(popup_ed26d0506fc51a4faf03ab337dcaac27)
+        ;
+
+        
+    
+    
+            var marker_84eda1e36c12ced36ba3894d89067cd5 = L.marker(
+                [36.49222222222223, 139.01166666666666],
+                {}
+            ).addTo(map_7457c9ce798ff9dfca027e0e24eb17e8);
+        
+    
+        var popup_2a11afa444d872dc4b5c66fc4b56e025 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_85874d49f4cf3ad88c975350ade28efb = $(`<div id="html_85874d49f4cf3ad88c975350ade28efb" style="width: 100.0%; height: 100.0%;">渋川自排局_10208510</div>`)[0];
+                popup_2a11afa444d872dc4b5c66fc4b56e025.setContent(html_85874d49f4cf3ad88c975350ade28efb);
+            
+        
+
+        marker_84eda1e36c12ced36ba3894d89067cd5.bindPopup(popup_2a11afa444d872dc4b5c66fc4b56e025)
+        ;
+
+        
+    
+    
+            var marker_ea388eec685a2691a2c2bdf573932035 = L.marker(
+                [36.259166666666665, 138.89527777777778],
+                {}
+            ).addTo(map_7457c9ce798ff9dfca027e0e24eb17e8);
+        
+    
+        var popup_00bbd1f0c9adad5a49dd7920a293ca83 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_d4719eb814a147a53e9112bafbb23ba4 = $(`<div id="html_d4719eb814a147a53e9112bafbb23ba4" style="width: 100.0%; height: 100.0%;">富岡市立富岡小学校_10210010</div>`)[0];
+                popup_00bbd1f0c9adad5a49dd7920a293ca83.setContent(html_d4719eb814a147a53e9112bafbb23ba4);
+            
+        
+
+        marker_ea388eec685a2691a2c2bdf573932035.bindPopup(popup_00bbd1f0c9adad5a49dd7920a293ca83)
+        ;
+
+        
+    
+    
+            var marker_8c2053eaf70a7f4c526301abb77f40d7 = L.marker(
+                [36.32333333333334, 138.9138888888889],
+                {}
+            ).addTo(map_7457c9ce798ff9dfca027e0e24eb17e8);
+        
+    
+        var popup_c88a95551fc6cf050b56f5f18436b129 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_86b7a84974bef75ab7789a3778109b04 = $(`<div id="html_86b7a84974bef75ab7789a3778109b04" style="width: 100.0%; height: 100.0%;">安中第１測定局_10211010</div>`)[0];
+                popup_c88a95551fc6cf050b56f5f18436b129.setContent(html_86b7a84974bef75ab7789a3778109b04);
+            
+        
+
+        marker_8c2053eaf70a7f4c526301abb77f40d7.bindPopup(popup_c88a95551fc6cf050b56f5f18436b129)
+        ;
+
+        
+    
+    
+            var marker_e03840362c2ed81081cb89405b2f60f7 = L.marker(
+                [36.32972222222222, 138.92777777777778],
+                {}
+            ).addTo(map_7457c9ce798ff9dfca027e0e24eb17e8);
+        
+    
+        var popup_5b521250fbb49de8af11871497cc0fb1 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_90a721c45b9f068dd637b75beed79e42 = $(`<div id="html_90a721c45b9f068dd637b75beed79e42" style="width: 100.0%; height: 100.0%;">岩野谷公民館_10211040</div>`)[0];
+                popup_5b521250fbb49de8af11871497cc0fb1.setContent(html_90a721c45b9f068dd637b75beed79e42);
+            
+        
+
+        marker_e03840362c2ed81081cb89405b2f60f7.bindPopup(popup_5b521250fbb49de8af11871497cc0fb1)
+        ;
+
+        
+    
+    
+            var marker_20e10bdc39a15751b184e7ba86fed3e7 = L.marker(
+                [36.33055555555556, 138.89638888888888],
+                {}
+            ).addTo(map_7457c9ce798ff9dfca027e0e24eb17e8);
+        
+    
+        var popup_8f5333a5a2a48162535c860844d56ef5 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_72ea9605e281af83a6242b0509e067ef = $(`<div id="html_72ea9605e281af83a6242b0509e067ef" style="width: 100.0%; height: 100.0%;">安中市立安中小学校_10211060</div>`)[0];
+                popup_8f5333a5a2a48162535c860844d56ef5.setContent(html_72ea9605e281af83a6242b0509e067ef);
+            
+        
+
+        marker_20e10bdc39a15751b184e7ba86fed3e7.bindPopup(popup_8f5333a5a2a48162535c860844d56ef5)
+        ;
+
+        
+    
+    
+            var marker_196fbefdfe90b6dd69237b0e31b0f547 = L.marker(
+                [36.33222222222223, 138.91694444444445],
+                {}
+            ).addTo(map_7457c9ce798ff9dfca027e0e24eb17e8);
+        
+    
+        var popup_32c90b5da1a088c120af65f40b0cb40c = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_23be8ac4dfc925853bba259915ca6af4 = $(`<div id="html_23be8ac4dfc925853bba259915ca6af4" style="width: 100.0%; height: 100.0%;">安中自排局_10211510</div>`)[0];
+                popup_32c90b5da1a088c120af65f40b0cb40c.setContent(html_23be8ac4dfc925853bba259915ca6af4);
+            
+        
+
+        marker_196fbefdfe90b6dd69237b0e31b0f547.bindPopup(popup_32c90b5da1a088c120af65f40b0cb40c)
+        ;
+
+        
+    
+    
+            var marker_9e1d810cc43d837da1e173369920da9c = L.marker(
+                [36.5775, 138.82861111111112],
+                {}
+            ).addTo(map_7457c9ce798ff9dfca027e0e24eb17e8);
+        
+    
+        var popup_88494f4c94e916444bd208429ee8bc9c = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_4bff5b7013096cd74c9ca7dfd9bbc345 = $(`<div id="html_4bff5b7013096cd74c9ca7dfd9bbc345" style="width: 100.0%; height: 100.0%;">東吾妻町立東吾妻中学校_10423010</div>`)[0];
+                popup_88494f4c94e916444bd208429ee8bc9c.setContent(html_4bff5b7013096cd74c9ca7dfd9bbc345);
+            
+        
+
+        marker_9e1d810cc43d837da1e173369920da9c.bindPopup(popup_88494f4c94e916444bd208429ee8bc9c)
+        ;
+
+        
+    
+    
+            var marker_5fc3d71b6bdf17b9098562448a2face1 = L.marker(
+                [36.50722222222223, 138.51527777777778],
+                {}
+            ).addTo(map_7457c9ce798ff9dfca027e0e24eb17e8);
+        
+    
+        var popup_993b18df7acded7e7b654c26ebcd3f86 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_d1958eb14af5bf66b6ee707baf7ab158 = $(`<div id="html_d1958eb14af5bf66b6ee707baf7ab158" style="width: 100.0%; height: 100.0%;">嬬恋村運動公園_10425010</div>`)[0];
+                popup_993b18df7acded7e7b654c26ebcd3f86.setContent(html_d1958eb14af5bf66b6ee707baf7ab158);
+            
+        
+
+        marker_5fc3d71b6bdf17b9098562448a2face1.bindPopup(popup_993b18df7acded7e7b654c26ebcd3f86)
+        ;
+
+        
+    
+    
+            var marker_166bf10f6aecfc37602e6ffb2baae1fb = L.marker(
+                [36.73111111111111, 138.98277777777778],
+                {}
+            ).addTo(map_7457c9ce798ff9dfca027e0e24eb17e8);
+        
+    
+        var popup_49bc2a5a26e9d48b0ba95dfee21ff6f6 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_2d4aab7f11647fdb07f063ffe615f8e1 = $(`<div id="html_2d4aab7f11647fdb07f063ffe615f8e1" style="width: 100.0%; height: 100.0%;">みなかみ町カルチャーセンター_10449010</div>`)[0];
+                popup_49bc2a5a26e9d48b0ba95dfee21ff6f6.setContent(html_2d4aab7f11647fdb07f063ffe615f8e1);
+            
+        
+
+        marker_166bf10f6aecfc37602e6ffb2baae1fb.bindPopup(popup_49bc2a5a26e9d48b0ba95dfee21ff6f6)
+        ;
+
+        
+    
+    
+            var marker_bb2081f281de63c16c6ccdf963c425dc = L.marker(
+                [36.29888888888889, 139.11],
+                {}
+            ).addTo(map_7457c9ce798ff9dfca027e0e24eb17e8);
+        
+    
+        var popup_6bed7488eaf8d852034358f9f21635d3 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_565833f79d3d0f74850408c438f45ebc = $(`<div id="html_565833f79d3d0f74850408c438f45ebc" style="width: 100.0%; height: 100.0%;">県央水質浄化センター_10464010</div>`)[0];
+                popup_6bed7488eaf8d852034358f9f21635d3.setContent(html_565833f79d3d0f74850408c438f45ebc);
+            
+        
+
+        marker_bb2081f281de63c16c6ccdf963c425dc.bindPopup(popup_6bed7488eaf8d852034358f9f21635d3)
+        ;
+
+        
+    
+</script>
+</html>
