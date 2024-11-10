@@ -3,41 +3,51 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import os
 from glob import glob
+from sklearn.metrics import root_mean_squared_error
 
-dir_path = 'python-code/lab/out_data/test_data'
+dir_path = 'out_data/results/DNN'
 
 dir_names = files_dir = [
     f for f in os.listdir(dir_path) if os.path.isdir(os.path.join(dir_path, f))
 ]
 
 for dir_name in dir_names:
-    target_dir_path = 'python-code/lab/out_data/test_data/' + dir_name + '/'
-    target_shaps = glob(target_dir_path + 'shap_mean*.csv')
+    target_dir_path = 'out_data/results/DNN/' + dir_name + '/'
+    target_shaps = glob(target_dir_path + 'out.csv')
     
     for path in target_shaps:
-        split_file_name = path.split('\\')[-1].split('_')
-        if len(split_file_name) == 3:
-            save_file_name = split_file_name[0] + '_20_' + split_file_name[1] + '_' + split_file_name[2]
-            mean_target_path = target_dir_path + split_file_name[0] + '_' + split_file_name[2]
-            df = pd.read_csv(mean_target_path, index_col = 0, header = 0)
+        target_df = pd.read_csv(path, index_col = 0)
+        target_predict = target_df.query('predict >= 80')
+        predict_len = len(target_predict)
+        obs_len = len(target_predict.query('obs >= 80'))
+        predict_per = (obs_len / predict_len) * 100
 
-        elif len(split_file_name) == 4:
-            save_file_name = split_file_name[0] + '_20_' + split_file_name[1] + '_' + split_file_name[2] + '_' + split_file_name[3]
-            mean_target_path = target_dir_path + split_file_name[0] + '_' + split_file_name[2] + '_' + split_file_name[3]
-            df = pd.read_csv(mean_target_path, index_col = 0, header = 0)
-        else:
-            raise ValueError("ファイルの名前を見直しやがれ")
+
+        rmse = root_mean_squared_error(target_df['obs'], target_df['predict'])
+        high_out = target_df.query('obs >= 80')
+        high_concent_day = high_out.index.to_list()
+        high_out_len = len(high_out)
+        high_rmse = root_mean_squared_error(high_out['obs'], high_out['predict'])
+        high_out_p = len(high_out.query('predict >= 80'))
+        obs_per = (high_out_p / high_out_len) * 100
+
+        compa = (2 * obs_per * predict_per) / (obs_per + predict_per)
+
+        high_concent_dict = {
+                            '高濃度出現回数': high_out_len,
+                            '高濃度追跡': high_out_p,
+                            '高濃度追跡率': obs_per,
+                            '高濃度RMSE': high_rmse,
+                            '予測高濃度出現回数': predict_len,
+                            '予測高濃度追跡': obs_len,
+                            '予測高濃度追跡率': predict_per,
+                            '適合率': compa
+                           }
         
-        #pd.DataFrame(df.abs().mean()).sort_values(by = 0, ascending = False).head(20).to_csv(target_dir_path + save_file_name)
-        corr_matrix = df.corr()
-
-        # ヒートマップの描画
-        plt.figure(figsize=(12, 10))  # 図のサイズを調整
-        sns.heatmap(corr_matrix, cmap='coolwarm', annot=False, fmt=".2f", 
-                    cbar=True, square=True, vmin=-1, vmax=1)
-        plt.title("Feature Correlation Heatmap")
-        plt.show()
-
+        out = pd.DataFrame(high_concent_dict, [0])
+        out.to_csv(target_dir_path + 'new_high_concent_check.csv')
+        
+        
 """         # 表示するセルのサイズを設定
         chunk_size = 24  # 分割サイズ (例: 20×20)
 
