@@ -18,7 +18,7 @@ for dir_name in dir_names:
 
 state_df = pd.DataFrame(state_dict, index = [0]).T
 print(state_df)
-state_df.to_csv('out_data/results/DNN/AllFeatures_low.csv')
+# state_df.to_csv('out_data/results/DNN/AllFeatures_low_df.csv')
 
 
     
