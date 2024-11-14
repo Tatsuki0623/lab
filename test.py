@@ -2,7 +2,7 @@ import pandas as pd
 
 # CSVファイルの読み込み
 low_df = pd.read_csv("out_data/results/DNN/AllFeatures_low.csv", encoding='utf-8', index_col=0)
-high_df = pd.read_csv("out_data/results/DNN/AllFeatures.csv", encoding='utf-8', index_col=0)
+high_df = pd.read_csv("out_data/results/DNN/AllFeatures_high_30.csv", encoding='utf-8', index_col=0)
 
 low_dict = low_df.to_dict()['0']
 high_dict = high_df.to_dict()['0']
@@ -34,10 +34,10 @@ for name in new_dict.keys():
 
 print(new_dict)
 
-a = pd.DataFrame(new_dict)
-print(a)
-a.to_csv('out_data/results/DNN/mergefeatures_df.csv')
+# a = pd.DataFrame(new_dict)
+# print(a)
+# a.to_csv('out_data/results/DNN/mergefeatures_df.csv')
 
 b = pd.DataFrame(high_pre_dict)
 print(b)
-b.to_csv('out_data/results/DNN/Allfeatures_high_df.csv')
+b.to_csv('out_data/results/DNN/Allfeatures_high_30_df.csv')
