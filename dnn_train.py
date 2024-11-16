@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import root_mean_squared_error
 import shap
 import os
+from concurrent.futures import ProcessPoolExecutor
 
 class MyDataset(torch.utils.data.Dataset):
 
@@ -134,7 +135,7 @@ class train():
                 optimizer.step()
 
             # 学習状況の表示
-            print(f"Epoch: {epoch+1}/{num_epochs}, Loss: {np.sqrt(loss_sum.item() / len(self.train_dataloader))}")
+            print(f"{state_name}_Epoch: {epoch+1}/{num_epochs}, Loss: {np.sqrt(loss_sum.item() / len(self.train_dataloader))}")
 
             # モデルの重みの保存
             torch.save(self.model.state_dict(), save_dir + 'model_weights.pth')
@@ -177,7 +178,6 @@ class train():
         out = pd.concat([out, true_ox], axis = 1)
         if training_num == max_training_num -1:
             self.plot(out)
-        self.high_concent(out)
         self.high_concent(out)
         self.shap_high_feature_importance()
         self.shap_feature_importance()
@@ -269,39 +269,58 @@ class train():
 # ["CH4","CO","HUM","NMHC","NO","NO2","NOX","OX","PM25","SO2","SPM","TEMP","THC","WD","WS"]# 世田谷区世田谷　**
 # ["CH4","CO","HUM","NMHC","NO","NO2","NOX","OX","PM25","SO2","SPM","TEMP","THC","WD","WS"]# 青梅市東青梅　**
 # ["CH4","CO","HUM","NMHC","NO","NO2","NOX","OX","PM25","SO2","SPM","TEMP","THC","WD","WS"]# 多摩市愛宕　**
+# ['CH4', 'HUM', 'NMHC', 'NO', 'NO2', 'NOX', 'OX', 'PM25', 'SO2', 'SPM', 'TEMP', 'THC', 'WD', 'WS'] 所沢市東所沢
+# ['CH4', 'CO', 'HUM', 'NMHC', 'NO', 'NO2', 'NOX', 'OX', 'SO2', 'SPM', 'TEMP', 'THC', 'WD', 'WS'] 草加市西町
 
-features_name = ["CH4","CO","HUM","NMHC","NO","NO2","NOX","OX","PM25","SO2","SPM","TEMP","THC","WD","WS"]# 多摩市愛宕
-state_name = '多摩市愛宕'
-lag = 1
-dir_path = '/content/drive/MyDrive/Colab Notebooks/'
-save_dir = os.path.join(dir_path, '_'.join(features_name))
-os.makedirs(save_dir + f'_{state_name}_lag={str(lag+1)}', exist_ok = True)
-save_dir = save_dir + f'_{state_name}_lag={str(lag+1)}/'
 
-max_training_num = 10
-df_li = []
-features = []
-for i in features_name:
-    for u in range(1,25):
-        new_features = i + '_' + str(u).zfill(2)
-        features.append(new_features)
 
-ra = train(dir_path + f'{state_name}_learning_24.csv',  dir_path + f'{state_name}_predict_24.csv', features = features, lag = lag)
+dir_path = 'input_data/learning_data/'
+# df  = pd.read_csv(dir_path + 'mergefeatures.csv', index_col=0)
+# features_name_dict = df.to_dict()['0']
 
-for training_num in range(max_training_num):
-    ra.start_train()
-    out_df = ra.start_predict()
-    df_li.append(out_df)
+features_name_dict = {'所沢市東所沢_lag=1':"['CH4','HUM','NMHC','NO','NO2','NOX','OX','PM25','SO2','SPM','TEMP','THC','WD','WS']",
+                      '所沢市東所沢_lag=2':"['CH4','HUM','NMHC','NO','NO2','NOX','OX','PM25','SO2','SPM','TEMP','THC','WD','WS']",
+                      '所沢市東所沢_lag=3':"['CH4','HUM','NMHC','NO','NO2','NOX','OX','PM25','SO2','SPM','TEMP','THC','WD','WS']",
+                      "草加市西町_lag=1":"['CH4','CO','HUM','NMHC','NO','NO2','NOX','OX','SO2','SPM','TEMP','THC','WD','WS']",
+                      '草加市西町_lag=2':"['CH4','CO','HUM','NMHC','NO','NO2','NOX','OX','SO2','SPM','TEMP','THC','WD','WS']",
+                      '草加市西町_lag=3':"['CH4','CO','HUM','NMHC','NO','NO2','NOX','OX','SO2','SPM','TEMP','THC','WD','WS']",
+                      
+                      }
 
-out_df = pd.concat(df_li)
-out_df = out_df.mean()
-out_df['高濃度追跡率'] = (out_df['高濃度追跡'] / out_df['高濃度出現回数']) * 100
-out_df.to_csv(save_dir + 'high_concent_check.csv')
+for name, features_name in features_name_dict.items():
+  state_name = name.split('_')[0]
+  lag = name.split('_')[1].split('=')[-1]
+  lag = int(lag) - 1
+  features = features_name.replace('[', '').replace(']', '').replace("'","").split(',')
+  print(len(features))
+  save_dir = os.path.join(dir_path, ','.join(features))
+  os.makedirs(save_dir + f'{name}', exist_ok = True)
+  save_dir = save_dir + f'_{state_name}/'
 
-shap_high_df = pd.read_csv(save_dir + 'shap_high_explanation.csv', index_col = 0, header = 0)
-shap_df = pd.read_csv(save_dir + 'shap_explanation.csv', index_col = 0, header = 0)
+  max_training_num = 10
+  df_li = []
+  new_features = []
+  for i in features:
+      for u in range(1,25):
+          new_feature = i + '_' + str(u).zfill(2)
+          new_features.append(new_feature)
 
-shap_high_df.abs().mean().to_csv(save_dir + 'shap_mean_high_explanation.csv')
-pd.DataFrame(shap_high_df.abs().mean()).sort_values(by = 0, ascending = False).head(20).to_csv(save_dir + 'shap_20_mean_high_explanation.csv')
-shap_df.abs().mean().to_csv(save_dir + 'shap_mean_explanation.csv')
-pd.DataFrame(shap_df.abs().mean()).sort_values(by = 0, ascending = False).head(20).to_csv(save_dir + 'shap_20_mean_explanation.csv')
+  ra = train(dir_path + f'{state_name}_learning_24.csv',  dir_path + f'{state_name}_predict_24.csv', features = new_features, lag = lag)
+
+  for training_num in range(max_training_num):
+      ra.start_train()
+      out_df = ra.start_predict()
+      df_li.append(out_df)
+
+  out_df = pd.concat(df_li)
+  out_df = out_df.mean()
+  out_df['高濃度追跡率'] = (out_df['高濃度追跡'] / out_df['高濃度出現回数']) * 100
+  out_df.to_csv(save_dir + 'high_concent_check.csv')
+
+  shap_high_df = pd.read_csv(save_dir + 'shap_high_explanation.csv', index_col = 0, header = 0)
+  shap_df = pd.read_csv(save_dir + 'shap_explanation.csv', index_col = 0, header = 0)
+
+  shap_high_df.abs().mean().to_csv(save_dir + 'shap_mean_high_explanation.csv')
+  pd.DataFrame(shap_high_df.abs().mean()).sort_values(by = 0, ascending = False).head(20).to_csv(save_dir + 'shap_20_mean_high_explanation.csv')
+  shap_df.abs().mean().to_csv(save_dir + 'shap_mean_explanation.csv')
+  pd.DataFrame(shap_df.abs().mean()).sort_values(by = 0, ascending = False).head(20).to_csv(save_dir + 'shap_20_mean_explanation.csv')

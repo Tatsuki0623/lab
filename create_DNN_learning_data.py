@@ -9,6 +9,7 @@ def create(path, save_name, flags, time_step, year):
     target_df.index.name = 'date'
     target_df.dropna(how = 'all', axis = 1, inplace = True)
     s_time = str(24 - time_step).zfill(2)
+    print(save_name)
     print(target_df.columns.to_list())
 
     for i in flags:
@@ -43,8 +44,7 @@ def create(path, save_name, flags, time_step, year):
             cat_li.append(learning_df)
 
             learning_df = pd.concat(cat_li, axis = 1)
-            learning_df.to_csv(f'python-code/lab/out_data/test_data/{save_name[0]}_{str(time_step)}.csv')
-            print(learning_df)
+            learning_df.to_csv(f'out_data/test_data/{save_name[0]}_{str(time_step)}.csv')
         else:
             s_dt = datetime.datetime.strptime(f'{year + 1}-03-31 {s_time}:00:00', '%Y-%m-%d %H:%M:%S').strftime('%Y-%m-%d %H:%M:%S')
             e_dt = datetime.datetime.strptime(f'{year + 2}-03-31 23:00:00', '%Y-%m-%d %H:%M:%S').strftime('%Y-%m-%d %H:%M:%S')
@@ -76,14 +76,13 @@ def create(path, save_name, flags, time_step, year):
             cat_li.append(predict_df)
 
             predict_df = pd.concat(cat_li, axis = 1)
-            predict_df.to_csv(f'python-code/lab/out_data/test_data/{save_name[1]}_{str(time_step)}.csv')
-            print(predict_df)
+            predict_df.to_csv(f'out_data/test_data/{save_name[1]}_{str(time_step)}.csv')
 
 
 flags = [True, False]
 template_name = ['_learning', '_predict']
 
-dir_name = 'python-code/lab/out_data/test_data/target_dir/'
+dir_name = 'out_data/test_data/target_dir/'
 path_li = glob(dir_name + '*.csv')
 for path in path_li:
     state_name = path.split('\\')[-1].split('.')[0] # 測定局名

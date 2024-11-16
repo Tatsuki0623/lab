@@ -1,7 +1,7 @@
 import pandas as pd
 import glob as gb
 
-csv_join = gb.glob('python-code/lab/out_data/ホニキデータ/*.csv')
+csv_join = gb.glob('out_data/ホニキデータ/*.csv')
 path = []
 
 print(csv_join)
@@ -29,4 +29,4 @@ for i, u in enumerate(csv_join):
         target_df = pd.concat([target_df, join_df], axis = 1)
 
 target_df.sort_index(inplace = True)
-target_df.to_csv('python-code/lab/out_data/ホニキデータ/ラブリーちゃんfeetレンファ改_最高値.csv', encoding = 'shift-jis')
+target_df.to_csv('out_data/ホニキデータ/merge_NOx_value.csv', encoding = 'shift-jis')

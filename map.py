@@ -1,7 +1,7 @@
 import pandas as pd
 import folium
 
-material_name = '対象地点'
+material_name = 'NOX'
 
 df = pd.read_csv(f'out_data/coordinate/csv/{material_name}_coordinate.csv', index_col = None, header = 0)
 

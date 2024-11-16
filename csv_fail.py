@@ -12,7 +12,7 @@ def csv_read(header_label_point = 0, index_label_point = 1, start_year = 2009, l
     for year in range(start_year, last_year):
         #inpu_dataフォルダ直下にあるフォルダに入っているcsvをすべて読み込み
         #フォルダ直下のフォルダのパス名は西暦（YYYY）にすること
-        year_path = gb.glob(f'python-code/lab/input_data/kankyou_date/{locate}/' + str(year) + '/*.csv')
+        year_path = gb.glob(f'input_data/kankyou_date/{locate}/' + str(year) + '/*.csv')
         for path in year_path:
             file_path_li.append(path)
 
@@ -178,7 +178,7 @@ def new_index_date_df(df_li, new_index_name_dict, flag = False):
     #flagを立たせるとこの時点でできたデータを出力させる
     if flag:
         for i in df_li.keys():
-            df_li[i].to_csv(f'python-code/lab/out_data/new_index_{i}.csv', header = False)
+            df_li[i].to_csv(f'out_data/new_index_{i}.csv', header = False)
 
     return df_li
 
@@ -342,7 +342,7 @@ def data_plt(x_data, y_data, x_label, y_label, title):
     plt.xlabel = x_label
     plt.ylabel = y_label
     plt.title = title
-    plt.savefig("python-code/lab/out_data/" + title + ".png")
+    plt.savefig("out_data/" + title + ".png")
     plt.show()
 
 
@@ -373,16 +373,14 @@ def main(locate = '', query_items = [], save_name = '', T_flag = True):
     #ここまで作ってきたデータフレーム全て結合させる
     out_df = join(df_li)
 
-    out_df = df_filter(out_df, '2018/1/1/0', '2020/12/31/23')
+    # out_df = df_filter(out_df, '2018/1/1/0', '2020/12/31/23')
 
     out_df.drop(columns=['year', 'month', 'day', 'time'], inplace = True)
 
-    out_df['OX'].to_csv(dir_path + save_name + '.csv')
+    out_df.to_csv(dir_path + save_name + '.csv')
 
     #結合させたデータフレームをcsvとして出力out_data/以降を変更することで保存名を変えられる
     print(out_df)
-
-    print('a')
 
         
 
@@ -403,9 +401,9 @@ query_itemsの0番目の値
 前橋東局_10201070
 """
 
-dir_path = 'python-code/lab/out_data/test_data/'
+dir_path = 'out_data/test_data/target_dir/'
 target_points = {
-    "gunma": ['前橋東局OX_10201070']
+    "saitama": ['所沢市東所沢_11208060', '草加市西町_11221050']
 }
 
 search_target = []
@@ -449,7 +447,7 @@ material_max_dict = month_max(out_df[col])
 #out_df = mean_8(out_df[col])
 
 #折れ線蔵として出力
-out_df.to_csv('python-code/lab/out_data/mean_8.csv')
+out_df.to_csv('out_data/mean_8.csv')
 
 x_data = out_df.index
 y_data = out_df.T.values[0]
