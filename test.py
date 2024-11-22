@@ -1,43 +1,61 @@
-import pandas as pd
+import psycopg
+import random
+from faker import Faker
 
-# CSVファイルの読み込み
-low_df = pd.read_csv("out_data/results/DNN/AllFeatures_low.csv", encoding='utf-8', index_col=0)
-high_df = pd.read_csv("out_data/results/DNN/AllFeatures_high_30.csv", encoding='utf-8', index_col=0)
+# PostgreSQL接続情報
+DB_CONFIG = {
+    'dbname': 'source_db',
+    'user': 'test_user',
+    'password': 'password',
+    'host': 'localhost',
+    'port': 5432
+}
 
-low_dict = low_df.to_dict()['0']
-high_dict = high_df.to_dict()['0']
+# データ生成と挿入
+def insert_data():
+    # Fakerインスタンス
+    fake = Faker()
 
-new_dict = {}
-high_pre_dict = {}
+    # PostgreSQLに接続
+    with psycopg.connect(**DB_CONFIG) as conn:
+        with conn.cursor() as cur:
+            # 1. batchテーブルに100万件挿入
+            print("Inserting into batch...")
+            batch_data = [
+                (fake.word(), fake.word(), fake.word(), fake.word(), fake.word(), fake.word())
+                for _ in range(500000)
+            ]
+            cur.executemany(
+                "INSERT INTO batch (column1, column2, column3, column4, column5, column6) VALUES (%s, %s, %s, %s, %s, %s)",
+                batch_data
+            )
+            conn.commit()
+            print("Batch data inserted.")
+            cur.execute("select max(id),min(id) from batch")
+            data = cur.fetchall()[0]
+            max = data[0]
+            min = data[1]
 
-for name, features_name in low_dict.items():
-    low_features = features_name.replace('[', '').replace(']', '').replace("'","").replace(' ', '').split(',')
-    high_features = high_dict[name].replace('[', '').replace(']', '').replace("'","").replace(' ', '').split(',')
+            # 2. batch_resultテーブルに挿入
+            print("Inserting into batch_result...")
 
-    new_li = list(set(low_features + high_features))
-    new_dict[name] = new_li
-    high_pre_dict[name] = high_features
+            batch_result_data = []
 
-le_li = []
-for name in new_dict.keys():
-    le = len(new_dict[name])
-    le_li.append(le)
-    
-ma = max(le_li)
+            for _ in range(1000000):
+                batch_result_data.append((
+                    random.randint(min,max),
+                    f"company_id - {random.randint(0,5000000)} - {random.randint(5000000,25000000)}",
+                    random.randint(5,60000000),
+                    random.randint(60000000,100000000)
+                ))
 
-for name in new_dict.keys():
-    while True:
-        if len(new_dict[name]) < ma:
-            new_dict[name].append(None)
-        else:
-            break
+            cur.executemany(
+                "INSERT INTO batch_result (batch_id, result_column1, result_column2, result_column3) VALUES (%s, %s, %s, %s)",
+                batch_result_data
+            )
+            conn.commit()
+            print("Batch_result data inserted.")
 
-print(new_dict)
-
-# a = pd.DataFrame(new_dict)
-# print(a)
-# a.to_csv('out_data/results/DNN/mergefeatures_df.csv')
-
-b = pd.DataFrame(high_pre_dict)
-print(b)
-b.to_csv('out_data/results/DNN/Allfeatures_high_30_df.csv')
+# 実行
+if __name__ == "__main__":
+    insert_data()
