@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>図書の森</title>
+        <link href="../css/test.css" rel="stylesheet">
+	</head>
+	<body>
+        <div class="header">
+            <h1>図書の森</h1>
+            <h2>書籍一覧画面</h2>
+            <label class="user-info">
+                ようこそ、
+                <a class="a-label" href="/book_forest_TatsukiImakire/change" th:text="${accountDto.userName}">うんち</a>
+                さん｜
+                <a class="a-label" href="/book_forest_TatsukiImakire/login">ログアウト</a>
+                はこちら
+            </label>
+            <br>
+        </div>
+        <div class="container">
+            <div class="search-section">
+                <h3>書籍検索</h3>
+                <form action="/book_forest_TatsukiImakire/search" method="get">
+                    <input type="text" name="title" id="title">
+                    <input type="submit" value="検索"> 
+                </form>
+            </div>
+            <div class="list-section">
+                <h3>書籍一覧</h3>
+                <table>
+                    <tr>
+                        <th>書籍ID</th>
+                        <th>タイトル</th>
+                        <th>著者</th>
+                        <th>貸し出し</th>
+                    </tr>
+                    <tr th:each="book : ${bookList}">
+                        <td th:text="${book.bookId}"></td>
+                        <td th:text="${book.title}"></td>
+                        <td th:text="${book.author}"></td>
+                        <td><a th:href="@{/book_forest_TatsukiImakire/renatal/(bookId=${book.id})}">借りる</a></td> 
+                    </tr>
+                </table>
+            </div>
+            <div class="rental-section">
+                <h3>貸し出し中書籍</h3>
+                <ul>
+                    <li>
+                        <a href="/book_forest_TatsukiImakire/currnent_rental" th:text="${book.title}"></a>
+                    </li>
+                </ul>
+                <a href="/book_forest_TatsukiImakire/renatal_history">貸し出し履歴</a>
+            </div>
+        </div>
+    </body>
+</html>

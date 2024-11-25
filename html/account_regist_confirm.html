@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/test.css">
+    <title>図書の森</title>
+</head>
+<body>
+    <h1>図書の森</h1>
+    <h2>アカウント登録画面</h2>
+    <main>
+        <form action="/book_forest_TatsukiImakire/account_regist_confirm" method="post">
+            <div class="form-control">
+                <label class="label" for="userName">お名前</label>
+                <input type="hidden" class="control" type="text" id="userName" name="userName" required>
+            </div>
+            <div class="form-control">
+                <label class="label" for="password">パスワード</label><br>
+                <label>＊非表示になります</label>
+                <input type="hidden" class="control" type="password" id="password" name="password" value="" required>
+            </div>
+            <div class="form-control">
+                <label class="label" for="email">メールアドレス</label>
+                <input type="hidden" class="control" type="email" id="email" name="email" required>
+            </div>
+            <div class="form-control-btn">
+                <input class="control-btn" type="submit" value="登録">
+                <button class="control-btn" type="button" onclick="history.back()">戻る</button>
+            </div>
+        </form>
+    </main>
+</body>
+</html>
