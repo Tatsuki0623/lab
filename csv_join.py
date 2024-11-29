@@ -29,4 +29,4 @@ for i, u in enumerate(csv_join):
         target_df = pd.concat([target_df, join_df], axis = 1)
 
 target_df.sort_index(inplace = True)
-target_df.to_csv('out_data/ホニキデータ/merge_NOx_value.csv', encoding = 'shift-jis')
+target_df.to_csv('out_data/ホニキデータ/merge_Ox_value_2_14.csv', encoding = 'shift-jis')

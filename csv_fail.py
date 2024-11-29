@@ -260,6 +260,18 @@ def df_filter(target_df, start_date, end_date):
 
     return target_df
 
+def df_extraction(out_df, target_times):
+    df_li = []
+    for time in target_times:
+        query_df = out_df.query(f"time == {time}")
+        df_li.append(query_df)
+    
+    new_df = pd.concat(df_li, axis=0)
+    new_df.sort_index(inplace=True)
+
+    return new_df
+
+
 #時間を横積みに変換する
 def df_T(target_df: pd.DataFrame):
     col_name = target_df.columns.to_list()
@@ -373,11 +385,15 @@ def main(locate = '', query_items = [], save_name = '', T_flag = True):
     #ここまで作ってきたデータフレーム全て結合させる
     out_df = join(df_li)
 
-    # out_df = df_filter(out_df, '2018/1/1/0', '2020/12/31/23')
+    out_df = df_filter(out_df, '2020/4/1/0', '2020/9/31/23')
+    
+    new_df = df_extraction(out_df, [2,14])
+
+    #new_df['OX'].to_csv(dir_path + save_name + '_2_14.csv', encoding='sjis')
 
     out_df.drop(columns=['year', 'month', 'day', 'time'], inplace = True)
 
-    out_df.to_csv(dir_path + save_name + '.csv')
+    #out_df['OX'].to_csv(dir_path + save_name + '.csv', encoding='sjis')
 
     #結合させたデータフレームをcsvとして出力out_data/以降を変更することで保存名を変えられる
     print(out_df)
@@ -401,9 +417,9 @@ query_itemsの0番目の値
 前橋東局_10201070
 """
 
-dir_path = 'out_data/test_data/target_dir/'
+dir_path = 'out_data/ホニキデータ/'
 target_points = {
-    "saitama": ['所沢市東所沢_11208060', '草加市西町_11221050']
+    "gunma": ["前橋東局_10201070"]
 }
 
 search_target = []
