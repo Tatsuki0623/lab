@@ -49,10 +49,12 @@ for target_sub_dir in top_dir_names:
         
         out = pd.DataFrame(high_concent_dict, [0])
         
-        remove_path = glob(target_dir_path + target_dir + "/*cent_check.csv")[0]
-        out.to_csv(target_dir_path + 'new_high_concent_check.csv')
-        os.remove(remove_path)
-        print(remove_path)
+        remove_paths = glob(target_dir_path + target_dir + "/*_check.csv")
+        for remove_path in remove_paths:
+            os.remove(remove_path)
+        out.to_csv(target_dir_path + target_dir + '/high_concent_check.csv')
+        
+        
         
         
 """         # 表示するセルのサイズを設定
