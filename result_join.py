@@ -18,10 +18,12 @@ for target_sub_dir in top_dir_names:
         df_list.append(df)
 
 new_df = pd.concat(df_list)
-new_df.to_csv("out_data/results/DNN/location_result/all_locate.csv", encoding="sjis")
+new_df.to_csv("out_data/results/DNN/locationResult/all_locateAndData.csv", encoding="sjis")
+new_df.drop(columns = ['予測高濃度出現回数', '予測高濃度追跡', '予測高濃度追跡率', '適合率'], inplace = True)
+new_df.to_csv("out_data/results/DNN/locationResult/all_locate.csv", encoding="sjis")
 
 locates = set([i.split("_")[0] for i in sub_dir_names if (len(i.split("_")) == 2)])
 for locate in locates:
     filtered_df = new_df[locate == new_df["locate"]]
     filtered_df.sort_index(inplace=True)
-    filtered_df.to_csv(f"out_data/results/DNN/location_result/{locate}.csv", encoding="sjis")
+    filtered_df.to_csv(f"out_data/results/DNN/locationResult/{locate}.csv", encoding="sjis")
