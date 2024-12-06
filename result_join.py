@@ -22,9 +22,10 @@ for target_sub_dir in top_dir_names:
                 df.rename(index = {"0": target_sub_dir + "_" + target_dir}, inplace = True)
             except FileNotFoundError:
                 df = None
-
+        print(df)
         if df is not None:
-            df_list.append(df)
+            continue
+        df_list.append(df)
 
 new_df = pd.concat(df_list)
 new_df.drop(columns = ['予測高濃度出現回数', '予測高濃度追跡', '予測高濃度追跡率', '適合率'], inplace = True)
