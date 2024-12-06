@@ -28,5 +28,9 @@ for target_sub_dir in top_dir_names:
 
 new_df = pd.concat(df_list)
 new_df.drop(columns = ['予測高濃度出現回数', '予測高濃度追跡', '予測高濃度追跡率', '適合率'], inplace = True)
-new_df.to_csv("out_data/test_data/test.csv")
-print(len(new_df.index.to_list()))
+
+locates = set([i.split("_")[0] for i in target_sub_dir])
+for locate in locates:
+    filtered_df = new_df[new_df.index.str.contains(locate)]
+    filtered_df.sort_index(inplace=True)
+    print(filtered_df)
