@@ -12,7 +12,7 @@ for target_sub_dir in top_dir_names:
     for target_dir in sub_dir_names:
         target_file_path = target_dir_path + target_dir + "/high_concent_check.csv"
         df = pd.read_csv(target_file_path, index_col = 0)
-        df.rename(index = {0: target_sub_dir}, inplace = True)
+        df.rename(index = {0: target_sub_dir + target_dir.split("_")[1]}, inplace = True)
         df["lag"] = target_dir.split("=")[-1]
         df["locate"] = target_dir.split("_")[0]
         df_list.append(df)
