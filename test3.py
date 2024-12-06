@@ -5,18 +5,21 @@ import os
 from glob import glob
 from sklearn.metrics import root_mean_squared_error
 
-dir_path = 'out_data/results/DNN'
+dir_path = "out_data/results/DNN/"
+top_dir_names = [f for f in os.listdir(dir_path) if os.path.isdir(os.path.join(dir_path, f))]
+df_list = []
 
-dir_names = files_dir = [
-    f for f in os.listdir(dir_path) if os.path.isdir(os.path.join(dir_path, f))
-]
-
-for dir_name in dir_names:
-    target_dir_path = 'out_data/results/DNN/' + dir_name + '/'
-    target_shaps = glob(target_dir_path + 'out.csv')
+for target_sub_dir in top_dir_names:
+    target_dir_path = dir_path + target_sub_dir + "/"
+    sub_dir_names = [f for f in os.listdir(target_dir_path) if os.path.isdir(os.path.join(target_dir_path, f))]
     
-    for path in target_shaps:
-        target_df = pd.read_csv(path, index_col = 0)
+    for target_dir in sub_dir_names:
+        
+        try:
+            target_file_path = target_dir_path + target_dir + "/out.csv"
+            target_df = pd.read_csv(target_file_path, index_col = 0)
+        except FileNotFoundError:
+            target_df = None
         target_predict = target_df.query('predict >= 80')
         predict_len = len(target_predict)
         obs_len = len(target_predict.query('obs >= 80'))
@@ -45,7 +48,11 @@ for dir_name in dir_names:
                            }
         
         out = pd.DataFrame(high_concent_dict, [0])
+        
+        remove_path = glob(target_dir_path + target_dir + "/*cent_check.csv")[0]
         out.to_csv(target_dir_path + 'new_high_concent_check.csv')
+        os.remove(remove_path)
+        print(remove_path)
         
         
 """         # 表示するセルのサイズを設定

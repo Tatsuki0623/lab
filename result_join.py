@@ -1,26 +1,32 @@
-from random import randint as rd
 import pandas as pd
-from glob import glob
+import os
 
-df_li = []
-file_num = [i for i in range(1,25)]
+dir_path = "out_data/results/DNN/"
+top_dir_names = [f for f in os.listdir(dir_path) if os.path.isdir(os.path.join(dir_path, f))]
+df_list = []
 
-features = []
-li1 = 'SPM：TEMP：WD：PM25：sin_day：cos_day：sin_hour：cos_hour'.split('：')
-li2 = 'PM25：SO2：SPM：TEMP：WD：cos_day：cos_hour：sin_day：sin_hour'.split('：')
+for target_sub_dir in top_dir_names:
+    target_dir_path = dir_path + target_sub_dir + "/"
+    sub_dir_names = [f for f in os.listdir(target_dir_path) if os.path.isdir(os.path.join(target_dir_path, f))]
+    
+    for target_dir in sub_dir_names:
+        
+        try:
+            target_file_path = target_dir_path + target_dir + "/high_cooncent_check.csv"
+            df = pd.read_csv(target_file_path, index_col = 0).T
+            df.rename(index = {"0": target_sub_dir + "_" + target_dir}, inplace = True)
+        except FileNotFoundError:
+            try:
+                target_file_path = target_dir_path + target_dir + "/high_concent_check.csv"
+                df = pd.read_csv(target_file_path, index_col = 0).T
+                df.rename(index = {"0": target_sub_dir + "_" + target_dir}, inplace = True)
+            except FileNotFoundError:
+                df = None
 
-features.append(li1)
-features.append(li2)
-for i in file_num:
+        if df is not None:
+            df_list.append(df)
 
-    if i < 16:
-        u = features[0]
-    else:
-        u = features[1]
-    l = ('：'.join(u))
-    out_df = pd.read_csv(f'python-code/lab/out_data/results/out_csv/harumi_timesteps={i}_scalermode=0_list={l}_出力結果.csv', header = 0)
-    df_li.append(out_df)
-out = pd.concat(df_li)
-out.index = file_num
-out.to_csv('python-code/lab/out_data/results/harumi/out_csv/harumi_timestep=join_scalermode=0_list=SPM：TEMP：WD：PM25：sin_day：cos_day：sin_hour：cos_hour_出力結果.csv', encoding = 'shift-jis')
-print(out)
+new_df = pd.concat(df_list)
+new_df.drop(columns = ['予測高濃度出現回数', '予測高濃度追跡', '予測高濃度追跡率', '適合率'], inplace = True)
+new_df.to_csv("out_data/test_data/test.csv")
+print(len(new_df.index.to_list()))
