@@ -18,21 +18,21 @@ for name, features_name in low_dict.items():
     new_dict[name] = str(new_li)
     high_pre_dict[name] = high_features
 
-# le_li = []
-# for name in new_dict.keys():
-#     le = len(new_dict[name])
-#     le_li.append(le)
+le_li = []
+for name in new_dict.keys():
+    le = len(new_dict[name])
+    le_li.append(le)
     
-# ma = max(le_li)
+ma = max(le_li)
 
-# for name in new_dict.keys():
-#     while True:
-#         if len(new_dict[name]) < ma:
-#             new_dict[name].append(None)
-#         else:
-#             break
+for name in new_dict.keys():
+    while True:
+        if len(new_dict[name]) < ma:
+            new_dict[name].append(None)
+        else:
+            break
 
-# print(new_dict)
+print(new_dict)
 
 a = pd.DataFrame(new_dict, index = [0]).T
 print(a)
