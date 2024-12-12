@@ -24,9 +24,9 @@ counter_2 = Counter(original_list_2)
 counter_3 = Counter(original_list_3)
 
 # 重複している要素のみを残す
-duplicates_only_1 = [item for item, count in counter_1.items() if count > 1 and not pd.isna(item)]
-duplicates_only_2 = [item for item, count in counter_2.items() if count > 1 and not pd.isna(item)]
-duplicates_only_3 = [item for item, count in counter_3.items() if count > 1 and not pd.isna(item)]
+duplicates_only_1 = [item for item, count in counter_1.items() if count > 7 and not pd.isna(item)]
+duplicates_only_2 = [item for item, count in counter_2.items() if count > 8 and not pd.isna(item)]
+duplicates_only_3 = [item for item, count in counter_3.items() if count > 6 and not pd.isna(item)]
 all = duplicates_only_1 + duplicates_only_2 + duplicates_only_3
 counter_all = Counter(all)
 duplicates_only_all = [item for item, count in counter_all.items() if count > 2]
