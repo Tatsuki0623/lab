@@ -198,12 +198,12 @@ class train():
 
     def high_concent(self, out: pd.DataFrame):
         rmse = root_mean_squared_error(out['obs'], out['predict'])
+        
         high_out = out.query('obs >= 80')
         high_concent_day = high_out.index.to_list()
         high_out_len = len(high_out)
         high_rmse = root_mean_squared_error(high_out['obs'], high_out['predict'])
         high_out_p = len(high_out.query('predict >= 80'))
-
         high_concent_dict = {'RMSE': rmse,
                            '高濃度出現回数': high_out_len,
                            '高濃度追跡': high_out_p,
