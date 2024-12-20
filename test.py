@@ -2,6 +2,7 @@ from datetime import date
 import pandas as pd
 from datetime import timedelta
 from glob import glob
+from sklearn.metrics import root_mean_squared_error
 
 check_dict_re = {}
 check_dict_pr = {}
@@ -12,6 +13,7 @@ out_df_li = []
 path_li = glob("out_data/results/DNN/god/*.csv")
 for path in path_li:
     df = pd.read_csv(path, index_col = 0, header = 0)
+    rmse = root_mean_squared_error(df["obs"], df["predict"])
     idx_num = int((len(df.index.to_list()) / 24) + 1)
     name = path.split("\\")[-1].split(".")[0]
 
@@ -74,6 +76,7 @@ for path in path_li:
         compa = (2 * recall * precision) / (recall + precision)
 
     high_concent_dict = {
+                        'RMSE': rmse,
                         '再現率': recall,
                         '適合率': precision,
                         '調和平均': compa

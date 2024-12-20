@@ -2,7 +2,7 @@ from datetime import date
 import pandas as pd
 from datetime import timedelta
 import os
-
+from sklearn.metrics import root_mean_squared_error
 dir_path = "out_data/results/DNN/"
 top_dir_names = [f for f in os.listdir(dir_path) if os.path.isdir(os.path.join(dir_path, f))]
 df_list = []
@@ -20,6 +20,7 @@ for target_sub_dir in top_dir_names:
     for path_name in sub_dir_names:
         target_file_path = target_dir_path + path_name +  "/out.csv"
         df = pd.read_csv(target_file_path, index_col = 0, header = 0)
+        rmse = root_mean_squared_error(df["obs"], df["predict"])
         idx_num = int((len(df.index.to_list()) / 24) + 1)
         name = target_sub_dir + "_" + path_name
 
@@ -82,6 +83,7 @@ for target_sub_dir in top_dir_names:
             compa = (2 * recall * precision) / (recall + precision)
 
         high_concent_dict = {
+                            'RMSE': rmse,
                             '再現率': recall,
                             '適合率': precision,
                             '調和平均': compa
@@ -94,6 +96,6 @@ out = pd.concat(out_df_li, axis = 0)
 out_check_df_pr = pd.concat(check_df_pr_li, axis = 1)
 out_check_df_re = pd.concat(check_df_re_li, axis = 1)
 
-out.to_csv("out_data/test_data/モデル評価_80.csv")
+out.to_csv("out_data/test_data/日別.csv")
 out_check_df_re.to_csv("out_data/test_data/再現率（日別）_80.csv")
 out_check_df_pr.to_csv("out_data/test_data/適合率（日別）_80.csv")
