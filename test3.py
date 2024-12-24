@@ -3,8 +3,8 @@ import glob
 
 dir = "out_data/results/DNN/locationResult/"
 file_name = "all_locateAndData.csv"
+ss = "out_data/test_data/日別.csv"
 
 df = pd.read_csv(dir + file_name, index_col = 0, header = 0, encoding = "sjis")
-df["調和平均"] = (2 * df["再現率"] * df["適合率"]) / (df["再現率"] + df["適合率"])
-df["特徴量"] = [i.split("_")[0] for i in df.index.to_list()]
-df.to_csv(dir + "test.csv", encoding = "sjis") 
+df_ss = pd.read_csv(ss, index_col = 0)
+df

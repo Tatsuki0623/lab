@@ -1,0 +1,5 @@
+,0,1,2,3,4,5,6
+lag=1,Ox_01,TEMP_01,HUM_01,TEMP_03,TEMP_02,Ox_23,1
+lag=2,Ox_01,TEMP_01,HUM_01,Ox_22,2,,
+lag=3,Ox_01,TEMP_01,HUM_01,3,,,
+all,Ox_01,TEMP_01,HUM_01,,,,
