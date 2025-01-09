@@ -182,6 +182,7 @@ def new_index_date_df(df_li, new_index_name_dict, flag = False):
 
     return df_li
 
+
 def join(df_li = dict):
     
     df_li_keys = df_li.keys()
@@ -260,6 +261,7 @@ def df_filter(target_df, start_date, end_date):
 
     return target_df
 
+
 def df_extraction(out_df, target_times):
     df_li = []
     for time in target_times:
@@ -270,7 +272,6 @@ def df_extraction(out_df, target_times):
     new_df.sort_index(inplace=True)
 
     return new_df
-
 
 #時間を横積みに変換する
 def df_T(target_df: pd.DataFrame):
@@ -286,7 +287,6 @@ def df_T(target_df: pd.DataFrame):
         df_pivot.columns = [f'{name}_{i}' for i in df_pivot.columns]
         target_df_li.append(df_pivot)
         
-
 #対象物質に対する月ごとの平均値を算出
 def month_mean(material_df: pd.DataFrame):
 
@@ -436,43 +436,3 @@ for locate, station_li in target_points.items():
         ]
 
         main(locate = locate, query_items = new_query_item, save_name = new_name, T_flag = T_flag)
-
-
-
-'''
-
-query_itemssave_name = 'itiharagunmoto'
-locate = 'tokyo'
-
-#一行目は変更してはいけない
-#二行目には必[0,index,測定局コード]を入れる
-#3行目以降に任意の探索対象を入れる
-query_item = [['演算子の選択', '検索対象行名、列名', '検索条件'],
-               [0, '測定局コード', 12219200]
-               ]
-
-
-
-#月平均値の出力
-material_mean_dict = month_mean(out_df[col])
-
-#月最大値の出力
-material_max_dict = month_max(out_df[col])
-
-#8時間移動平均値の出力
-#out_df = mean_8(out_df[col])
-
-#折れ線蔵として出力
-out_df.to_csv('out_data/mean_8.csv')
-
-x_data = out_df.index
-y_data = out_df.T.values[0]
-
-x_label = 'date(YYYY-MM)'
-y_label = 'Ox(ppb)'
-title = 'Ox_max_concentrate'
-
-#折れ線グラフを出力し画像データとしても保存
-data_plt(x_data, y_data, x_label, y_label, title)
-
-'''
