@@ -86,7 +86,9 @@ for target_sub_dir in top_dir_names:
                             'RMSE': rmse,
                             '再現率': recall,
                             '適合率': precision,
-                            '調和平均': compa
+                            '調和平均': compa,
+                            'n(再現率)': all_recall_num,
+                            'n(適合率)': all_precision_num
                             }
 
         out_df = pd.DataFrame(high_concent_dict, [name])
@@ -96,6 +98,6 @@ out = pd.concat(out_df_li, axis = 0)
 out_check_df_pr = pd.concat(check_df_pr_li, axis = 1)
 out_check_df_re = pd.concat(check_df_re_li, axis = 1)
 
-out.to_csv("out_data/test_data/日別.csv")
-out_check_df_re.to_csv("out_data/test_data/再現率（日別）_80.csv")
-out_check_df_pr.to_csv("out_data/test_data/適合率（日別）_80.csv")
+out.to_csv("out_data/test_data/日別.csv", encoding = "sjis")
+out_check_df_re.to_csv("out_data/test_data/再現率（日別）_80.csv", encoding = "sjis")
+out_check_df_pr.to_csv("out_data/test_data/適合率（日別）_80.csv", encoding = "sjis")

@@ -385,7 +385,7 @@ def main(locate = '', query_items = [], save_name = '', T_flag = True):
     #ここまで作ってきたデータフレーム全て結合させる
     out_df = join(df_li)
 
-    out_df = df_filter(out_df, '2020/4/1/0', '2020/9/31/23')
+    # out_df = df_filter(out_df, '2018/4/1/0', '2020/9/31/23')
     
     new_df = df_extraction(out_df, [2,14])
 
@@ -393,7 +393,7 @@ def main(locate = '', query_items = [], save_name = '', T_flag = True):
 
     out_df.drop(columns=['year', 'month', 'day', 'time'], inplace = True)
 
-    #out_df['OX'].to_csv(dir_path + save_name + '.csv', encoding='sjis')
+    out_df.to_csv(dir_path + save_name + '.csv', encoding='sjis')
 
     #結合させたデータフレームをcsvとして出力out_data/以降を変更することで保存名を変えられる
     print(out_df)
@@ -419,7 +419,7 @@ query_itemsの0番目の値
 
 dir_path = 'out_data/ホニキデータ/'
 target_points = {
-    "gunma": ["前橋東局_10201070"]
+    "tiba": ["木更津中央_12206010"]
 }
 
 search_target = []

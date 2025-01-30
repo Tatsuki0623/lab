@@ -17,8 +17,8 @@ def create(path, save_name, flags, time_step, year):
             s_dt = datetime.datetime.strptime(f'{year}-03-31 {s_time}:00:00', '%Y-%m-%d %H:%M:%S').strftime('%Y-%m-%d %H:%M:%S')
             e_dt = datetime.datetime.strptime(f'{year + 1}-03-31 23:00:00', '%Y-%m-%d %H:%M:%S').strftime('%Y-%m-%d %H:%M:%S')
             query_df = target_df.query(f'\'{s_dt}\' <= date <= \'{e_dt}\'')
-            Ox_query_df = query_df.rename(columns={'OX': 'OX_lag_0'})
-            Ox_df_0 = Ox_query_df['OX_lag_0'].iloc[time_step:]
+            Ox_query_df = query_df.rename(columns={'NMHC': 'NMHC_lag_0'})
+            Ox_df_0 = Ox_query_df['NMHC_lag_0'].iloc[time_step:]
             del Ox_query_df
             name_li = query_df.columns.to_list()
             cat_li = []
@@ -27,7 +27,7 @@ def create(path, save_name, flags, time_step, year):
             for i in range(1,3):
                 s_lag_dt = datetime.datetime.strptime(f'{year}-03-31 {s_time}:00:00', '%Y-%m-%d %H:%M:%S').strftime('%Y-%m-%d %H:%M:%S')
                 e_lag_dt = datetime.datetime.strptime(f'{year + 1}-04-01 0{str(i - 1)}:00:00', '%Y-%m-%d %H:%M:%S').strftime('%Y-%m-%d %H:%M:%S')
-                Ox_df = target_df.rename(columns = {'OX': f'OX_lag_{i}'}).query(f'\'{s_lag_dt}\' <= date <= \'{e_lag_dt}\'').shift(-i)[f'OX_lag_{i}'][time_step:-i]
+                Ox_df = target_df.rename(columns = {'NMHC': f'NMHC_lag_{i}'}).query(f'\'{s_lag_dt}\' <= date <= \'{e_lag_dt}\'').shift(-i)[f'NMHC_lag_{i}'][time_step:-i]
                 cat_li.append(Ox_df)
 
             new_data_li = []
@@ -50,8 +50,8 @@ def create(path, save_name, flags, time_step, year):
             e_dt = datetime.datetime.strptime(f'{year + 2}-03-31 23:00:00', '%Y-%m-%d %H:%M:%S').strftime('%Y-%m-%d %H:%M:%S')
             query_df = target_df.query(f'\'{s_dt}\' <= date <= \'{e_dt}\'')
             name_li = query_df.columns.to_list()
-            Ox_query_df = query_df.rename(columns={'OX': 'OX_lag_0'})
-            Ox_df_0 = Ox_query_df['OX_lag_0'].iloc[time_step:]
+            Ox_query_df = query_df.rename(columns={'NMHC': 'NMHC_lag_0'})
+            Ox_df_0 = Ox_query_df['NMHC_lag_0'].iloc[time_step:]
             del Ox_query_df
             cat_li = []
             cat_li.append(Ox_df_0)
@@ -59,7 +59,7 @@ def create(path, save_name, flags, time_step, year):
             for i in range(1,3):
                 s_lag_dt = datetime.datetime.strptime(f'{year + 1}-03-31 {s_time}:00:00', '%Y-%m-%d %H:%M:%S').strftime('%Y-%m-%d %H:%M:%S')
                 e_lag_dt = datetime.datetime.strptime(f'{year + 2}-04-01 0{str(i - 1)}:00:00', '%Y-%m-%d %H:%M:%S').strftime('%Y-%m-%d %H:%M:%S')
-                Ox_df = target_df.rename(columns = {'OX': f'OX_lag_{i}'}).query(f'\'{s_lag_dt}\' <= date <= \'{e_lag_dt}\'').shift(-i)[f'OX_lag_{i}'][time_step:-i]
+                Ox_df = target_df.rename(columns = {'NMHC': f'NMHC_lag_{i}'}).query(f'\'{s_lag_dt}\' <= date <= \'{e_lag_dt}\'').shift(-i)[f'NMHC_lag_{i}'][time_step:-i]
                 cat_li.append(Ox_df)
 
             new_data_li = []
@@ -80,7 +80,7 @@ def create(path, save_name, flags, time_step, year):
 
 
 flags = [True, False]
-template_name = ['_learning', '_predict']
+template_name = ['_NMHC_learning', '_NMHC_predict']
 
 dir_name = 'out_data/test_data/target_dir/'
 path_li = glob(dir_name + '*.csv')
